@@ -205,6 +205,22 @@ ShaderTypes::ShaderTypes() {
 	shader_modes[RS::SHADER_SPATIAL].functions["light"].can_discard = true;
 	shader_modes[RS::SHADER_SPATIAL].functions["light"].main_function = true;
 
+	// #### TASTYSPLEEN_REKI 4/17/2025 ####
+	shader_modes[RS::SHADER_SPATIAL].functions["final"].built_ins["FRAGCOORD"] = constt(ShaderLanguage::TYPE_VEC4);
+	shader_modes[RS::SHADER_SPATIAL].functions["final"].built_ins["NORMAL"] = constt(ShaderLanguage::TYPE_VEC3);
+	shader_modes[RS::SHADER_SPATIAL].functions["final"].built_ins["VIEW"] = constt(ShaderLanguage::TYPE_VEC3);
+	shader_modes[RS::SHADER_SPATIAL].functions["final"].built_ins["DIFFUSE_LIGHT"] = ShaderLanguage::TYPE_VEC3;
+	shader_modes[RS::SHADER_SPATIAL].functions["final"].built_ins["AMBIENT_LIGHT"] = ShaderLanguage::TYPE_VEC3;
+	shader_modes[RS::SHADER_SPATIAL].functions["final"].built_ins["ALBEDO"] = ShaderLanguage::TYPE_VEC3;
+	shader_modes[RS::SHADER_SPATIAL].functions["final"].built_ins["METALLIC"] = constt(ShaderLanguage::TYPE_FLOAT);
+	shader_modes[RS::SHADER_SPATIAL].functions["final"].built_ins["ROUGHNESS"] = constt(ShaderLanguage::TYPE_FLOAT);
+	shader_modes[RS::SHADER_SPATIAL].functions["final"].built_ins["UV"] = constt(ShaderLanguage::TYPE_VEC2);
+	shader_modes[RS::SHADER_SPATIAL].functions["final"].built_ins["UV2"] = constt(ShaderLanguage::TYPE_VEC2);
+
+	shader_modes[RS::SHADER_SPATIAL].functions["final"].can_discard = true;
+	shader_modes[RS::SHADER_SPATIAL].functions["final"].main_function = true;
+	// #### TASTYSPLEEN_REKI 4/17/2025 ####
+
 	// spatial render modes
 	{
 		shader_modes[RS::SHADER_SPATIAL].modes.push_back({ PNAME("blend"), "mix", "add", "sub", "mul", "premul_alpha" });

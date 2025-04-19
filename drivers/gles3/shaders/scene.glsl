@@ -2117,8 +2117,13 @@ void main() {
 #endif // USE_LIGHTMAP_CAPTURE
 #endif // !DISABLE_LIGHTMAP
 
-	ambient_light *= albedo.rgb;
 	ambient_light *= ao;
+
+	// #### TASTYSPLEEN_REKI 4/17/2025 ####
+#if !defined(FINAL_CODE_USED)
+	ambient_light *= albedo.rgb;
+#endif
+	// #### TASTYSPLEEN_REKI 4/17/2025 ####
 
 #endif // !AMBIENT_LIGHT_DISABLED
 
@@ -2283,12 +2288,21 @@ void main() {
 	frag_color = vec4(albedo, alpha);
 #else
 
+#if defined(FINAL_CODE_USED)
+	{
+#CODE : FINAL	
+	}
+	
+	frag_color = vec4(albedo, alpha);
+#else
+
 	diffuse_light *= albedo;
 	diffuse_light *= 1.0 - metallic;
 	ambient_light *= 1.0 - metallic;
 
 	frag_color = vec4(diffuse_light + specular_light, alpha);
 	frag_color.rgb += emission + ambient_light;
+#endif
 #endif //!MODE_UNSHADED
 
 #ifndef FOG_DISABLED
