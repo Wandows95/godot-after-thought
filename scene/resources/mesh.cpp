@@ -2229,6 +2229,13 @@ Error ArrayMesh::lightmap_unwrap_cached(const Transform3D &p_base_transform, flo
 			if (lightmap_surfaces[surface].format & ARRAY_FORMAT_WEIGHTS) {
 				surfaces_tools[surface]->set_weights(v.weights);
 			}
+			/** TASTYSPLEEN_CLASSY 4/25/2025 **/
+			if (lightmap_surfaces[surface].format & ARRAY_FORMAT_CUSTOM0) {
+				// TODO: Get the custom format that was used before, this is hard-coded for our use-case
+				surfaces_tools[surface]->set_custom_format(0, SurfaceTool::CustomFormat::CUSTOM_R_FLOAT);
+                surfaces_tools[surface]->set_custom(0, v.custom[0]);
+            }
+			/** TASTYSPLEEN_CLASSY 4/25/2025 **/
 
 			Vector2 uv2(gen_uvs[gen_indices[i + j] * 2 + 0], gen_uvs[gen_indices[i + j] * 2 + 1]);
 			surfaces_tools[surface]->set_uv2(uv2);
